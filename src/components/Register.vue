@@ -1,5 +1,4 @@
 <template>
-    <main class="container">
         <div class="card">
         <h2>Register User</h2>
         <form>
@@ -28,10 +27,10 @@
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    </main>
 </template>
 <style>
 .card{
+    margin: 40px auto;
     padding: 40px;
     width: 60%;
 }
