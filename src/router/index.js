@@ -1,30 +1,45 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Login from '../views/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'auth',
-      component: () => import('../views/Layout/Auth.vue'),
-      children: [
-        { 
-          path: 'login',
-          component: () => import('../components/Login.vue'),
-        },
-        { 
-          path: 'register',
-          component: () => import('../components/Register.vue'),
-        },
-      ]
+      name: 'login',
+      component: Login
     },
     {
       path: '/home',
       name: 'home',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../components/Transactions.vue')
+      component: () => import('../views/Home.vue'),
+      children:[
+        {
+          path: '',
+          name: 'transactions',
+          component: ()=> import('../components/Transactions.vue')
+        },
+        {
+          path: '/deposit',
+          name: 'deposit',
+          component: ()=> import('../components/Deposit.vue')
+        },
+        {
+          path: '/withdraw',
+          name: 'withdraw',
+          component: ()=> import('../components/Withdraw.vue')
+        },
+        {
+          path: '/transfer',
+          name: 'transfer',
+          component: ()=> import('../components/Transfer.vue')
+        }
+      ]
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/Register.vue')
     }
   ]
 })
