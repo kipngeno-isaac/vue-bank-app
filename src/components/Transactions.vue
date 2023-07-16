@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <div class="card">
     <h1> Transactions</h1>
   
     <table class="table">
@@ -45,5 +45,5 @@
     </tr>
   </tbody>
 </table>
-</section>
+</div>
 </template>
