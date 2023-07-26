@@ -2,7 +2,7 @@
   <main class="container">
     <div class="card">
       <h2>Login User</h2>
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -36,6 +36,54 @@
     </div>
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      formData: {
+        email: "",
+        password: "",
+      },
+      loading: false,
+      success: false,
+      error: null,
+    };
+  },
+  methods: {
+    submitForm() {
+      this.loading = true;
+      this.success = false;
+      this.error = null;
+console.log("formdata", this.formData);
+      fetch("http://127.0.0.1:8000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.formData),
+      })
+        .then((response) => {
+          if (response.ok) {
+            this.success = true;
+            this.formData = {
+              email: "",
+              password: ""
+            };
+          } else {
+            throw new Error("Failed to submit form");
+          }
+        })
+        .catch((error) => {
+          this.error = error.message;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+  },
+};
+</script>
 <style>
 .card {
     margin: 40px auto;
